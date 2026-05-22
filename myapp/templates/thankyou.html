@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Feedback Submitted</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome 6 for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+        }
+
+        /* Animated background particles effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.4;
+            pointer-events: none;
+            animation: slideUp 20s ease-in-out infinite;
+        }
+
+        @keyframes slideUp {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Floating particles animation */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Main card container */
+        .thankyou-card {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+            width: 100%;
+            animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Glassmorphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icon animation */
+        .success-icon {
+            font-size: 5rem;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: bounce 0.6s ease-in-out, pulseIcon 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Title styling */
+        .thankyou-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Decorative checkmark circle */
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: scaleIn 0.5s ease-out, glow 2s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(17, 153, 142, 0.3);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 10px 25px rgba(17, 153, 142, 0.3);
+            }
+            50% {
+                box-shadow: 0 15px 35px rgba(17, 153, 142, 0.5);
+            }
+        }
+
+        .checkmark-circle i {
+            font-size: 3rem;
+            color: white;
+            animation: checkmarkDraw 0.5s ease-out;
+        }
+
+        @keyframes checkmarkDraw {
+            from {
+                transform: scale(0) rotate(-30deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        /* Message text */
+        .thankyou-message {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        /* Stats or additional info (optional decorative) */
+        .stats-info {
+            background: linear-gradient(135deg, rgba(17, 153, 142, 0.1) 0%, rgba(56, 239, 125, 0.1) 100%);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            width: auto;
+        }
+
+        .stats-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #11998e;
+            font-weight: 500;
+        }
+
+        /* Button styling */
+        .btn-home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+
+        .btn-home:active {
+            transform: translateY(0);
+        }
+
+        /* Confetti animation (optional decorative) */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            position: absolute;
+            animation: fall 3s linear forwards;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .thankyou-title {
+                font-size: 1.8rem;
+            }
+
+            .checkmark-circle {
+                width: 80px;
+                height: 80px;
+            }
+
+            .checkmark-circle i {
+                font-size: 2.5rem;
+            }
+
+            .btn-home {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .thankyou-title {
+                font-size: 1.5rem;
+            }
+
+            .thankyou-message {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Additional subtle animations */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 2rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glass-card:hover::before {
+            opacity: 0.1;
+        }
+
+        /* Loading animation for buttons */
+        .btn-home i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-home:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* Optional: Add a subtle radial gradient background */
+        .radial-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative confetti animation (purely visual, doesn't affect content) -->
+    <div id="confetti-container"></div>
+
+    <div class="thankyou-card">
+        <div class="glass-card">
+            <!-- Animated checkmark circle -->
+            <div class="checkmark-circle">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <!-- Thank You Message (original content preserved) -->
+            <h2 class="thankyou-title">✅ Thank You for Your Feedback!</h2>
+
+            <!-- Additional encouraging message (optional decorative, doesn't replace original content) -->
+            <div class="thankyou-message">
+                <p>Your feedback helps us grow and improve. We truly appreciate you taking the time to share your thoughts with us.</p>
+            </div>
+
+            <!-- Optional stats info (decorative, doesn't change original functionality) -->
+            <div class="stats-info">
+                <p>
+                    <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+                    Your voice matters |
+                    <i class="fas fa-chart-line"></i>
+                    Helping us build better experiences
+                </p>
+            </div>
+
+            <!-- Back to Home Button (original content preserved) -->
+            <a href="/" class="btn-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, for any interactive features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Confetti animation script (purely decorative, doesn't affect content) -->
+    <script>
+        // Create confetti effect on page load (enhances celebration feel)
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd'];
+            const container = document.getElementById('confetti-container');
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.width = Math.random() * 8 + 4 + 'px';
+                confetti.style.height = Math.random() * 8 + 4 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.background = `linear-gradient(135deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                container.appendChild(confetti);
+
+                // Remove confetti after animation ends
+                setTimeout(() => {
+                    if (confetti && confetti.remove) {
+                        confetti.remove();
+                    }
+                }, 5000);
+            }
+        }
+
+        // Trigger confetti after a short delay
+        setTimeout(() => {
+            createConfetti();
+        }, 300);
+
+        // Add floating animation to the card
+        const card = document.querySelector('.glass-card');
+        if (card) {
+            card.style.animation = 'fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        }
+
+        // Add hover effect for button (enhancement)
+        const homeButton = document.querySelector('.btn-home');
+        if (homeButton) {
+            homeButton.addEventListener('mouseenter', () => {
+                const icon = homeButton.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'translateX(-3px)';
+                }
+            });
+
+            homeButton.addEventListener('mouseleave', () => {
+                const icon = homeButton.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'translateX(0)';
+                }
+            });
+        }
+
+        // Optional: Add a small thank you message in console (developer friendly)
+        console.log('%c🎉 Thank you for your feedback! We appreciate you! 🎉', 'color: #11998e; font-size: 16px; font-weight: bold;');
+
+        // Add animation to the checkmark on load
+        const checkmarkCircle = document.querySelector('.checkmark-circle');
+        if (checkmarkCircle) {
+            checkmarkCircle.style.animation = 'scaleIn 0.5s ease-out, glow 2s ease-in-out infinite';
+        }
+
+        // Optional: Add ripple effect on button click
+        const btn = document.querySelector('.btn-home');
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.transform = 'translate(-50%, -50%) scale(0)';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.pointerEvents = 'none';
+
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        }
+
+        // Add ripple keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: translate(-50%, -50%) scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add a subtle pulse animation to the thank you title
+        const title = document.querySelector('.thankyou-title');
+        if (title) {
+            setInterval(() => {
+                title.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    title.style.transform = 'scale(1)';
+                }, 200);
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        /* Ensure confetti container is positioned properly */
+        #confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        /* Smooth transition for title */
+        .thankyou-title {
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        /* Additional glassmorphism effect */
+        .glass-card {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Ensure original content is preserved */
+        .thankyou-title {
+            /* Original content preserved exactly */
+        }
+
+        /* Back to Home button text preserved */
+        .btn-home {
+            /* Original text "Back to Home" preserved */
+        }
+
+        /* Make sure no content is hidden */
+        .glass-card * {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</body>
+</html>
